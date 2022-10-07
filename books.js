@@ -1,16 +1,20 @@
 
-function renderBooks(){
+function renderBooks(filter){
   const booksWrapper = document.querySelector('.books');
   
   const books = getBooks();
   
+  if(filter.target.value === 'LOW_TO_HIGH'){
+    
+  }
+
   const booksHTML = books.map(book => {
-    `  <div class="book">
+    return `  <div class="book">
     <figure class="book__img--wrapper">
-      <img class="book__img" src="assets/deep work.jpeg" alt="">
+      <img class="book__img" src="${book.url}" alt="">
     </figure>
     <div class="book__title">
-      Deep Work
+      ${book.title}
     </div>
     <div class="book__ratings">
       <i class="fas fa-star"></i>
@@ -20,17 +24,28 @@ function renderBooks(){
       <i class="fas fa-star-half-alt"></i>
     </div>
     <div class="book__price">
-      <span class="book__price--normal">$59.95</span> $14.95
+      <span >$${book.originalPrice.toFixed(2)}</span>
     </div>
   </div>`
-  })
-  // booksWrapper.innerHTML =
+  }).join("")
+
+
+  booksWrapper.innerHTML = booksHTML
 
 }
 setTimeout(() => {
 renderBooks()
   
 });
+
+function filterBooks(event){
+    renderBooks(event.target.value)
+}
+
+
+
+
+
 // FAKE DATA
 function getBooks() {
   return [
